@@ -1,0 +1,21 @@
+
+    {{> bootcampinfo}}
+
+    <h5>I heard you're {{age}} years old</h5>
+    {{#if certified}}
+    <h4>wow, youre even certified. impressive</h4>
+    {{/if}}
+
+    {{#unless certified}}
+    <h4>not certified yet? how dissapointing.</h4>
+    {{/unless}}
+
+
+    <div>
+        cities where {{name}} exists: 
+        <ul>
+            {{#each cities}}
+            <h3>{{this}}</h3>
+            {{/each}}
+        </ul>
+    </div>

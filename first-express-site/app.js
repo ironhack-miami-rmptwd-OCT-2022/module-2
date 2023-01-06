@@ -11,16 +11,12 @@ app.get('/', (request, response, next) => {
   });
 
 
-
-
   app.get('/cool-cat', (request, response, next) => {
     console.log(request);
     response.sendFile(__dirname + '/views/cat-page.html');
   });
 
   
-
-
 
 
 
