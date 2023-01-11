@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dynamic Express Example</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+  </head>
+  <body>
+    <div>
+        <a href="/">Ironhack Page</a>
+        <a href="/blah">GA Page</a>
+        <a href="/cool-cat">Cat Page</a>
+    </div>
+ 
+    {{!-- any page we want to render will be "plugged in" here, in the "body" with triple stashes --}}
+    {{!-- this is the only page that will have full html setup --}}
+    {{!-- if there's anything you want to have on each page, it will come from here
+    ex. navbar, header, footer, etc --}}
+ 
+    {{{ body }}} 
+  </body>
+</html>
