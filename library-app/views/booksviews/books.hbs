@@ -1,0 +1,15 @@
+
+<h3>Welcome to the books page</h3>
+
+{{#each listOfBooks}}
+
+<div>
+    <a href="/books/{{this._id}}">
+        {{this.title}} - {{this.author}}
+    </a>
+
+</div>
+<hr>
+
+
+{{/each}}
