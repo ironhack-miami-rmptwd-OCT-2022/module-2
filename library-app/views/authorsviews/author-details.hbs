@@ -1,0 +1,29 @@
+<h1>{{theAuthor.name}}</h1>
+<a href="/authors/edit/{{theAuthor._id}}">Edit This Author</a>
+
+
+<h3>
+Born: {{theAuthor.hometown}} {{theAuthor.birthday}}
+</h3>
+
+
+<img src="{{theAuthor.image_url}}" style="width: 250px">
+
+
+<br><br>
+
+<form action="/authors/delete/{{theAuthor._id}}" method="post">
+    <button>Delete This Author</button>
+</form>
+
+
+<h3>Books By This Author</h3>
+
+{{#each theBooks}}
+<a href="/books/{{this._id}}">
+    <div>
+        {{this.title}}
+    </div>
+</a>
+<hr>
+{{/each}}

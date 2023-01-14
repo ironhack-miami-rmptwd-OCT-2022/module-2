@@ -1,0 +1,27 @@
+<h1>Welcome to Edit Page</h1>
+<h2>Currently Editing: {{author.name}}</h2>
+
+
+<form action="/authors/update/{{author._id}}" method="post">
+    <div>
+        Name: 
+        <input type="text" name="name" value="{{author.name}}">
+    </div>
+    <div>
+        hometown: 
+        <input type="text" name="hometown" value="{{author.hometown}}">
+    </div>
+    <div>
+        birthday: 
+        <input type="text" name="birthday" value="{{author.birthday}}">
+    </div>
+ 
+    <div>
+        Image: 
+        <input type="text" name="image" value="{{author.image_url}}">
+    </div>
+
+
+
+    <button>Save Changes</button>
+</form>

@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Book = require("../models/Book.model");
-const Author = require("../models/Author.model");
 
 /* GET home page */
 router.get("/books", (req, res, next) => {
-    Book.find().populate("author")
+    Book.find()
     .then((allTheBooks)=>{
 
     res.render("booksviews/books", {listOfBooks: allTheBooks});
@@ -18,18 +17,8 @@ router.get("/books", (req, res, next) => {
 
 
 router.get("/books/create", (req, res, next)=>{
-    Author.find()
-    .then((allAuthors)=>{
-        res.render("booksviews/new-book", {authors: allAuthors})
-    })
-    .catch((err)=>{
-        next(err);
-    })
+    res.render("booksviews/new-book")
 })
-
-
-
-
 router.post("/books/create-new", (req, res, next)=>{
     Book.create({
         title: req.body.title, 
@@ -49,10 +38,8 @@ router.post("/books/create-new", (req, res, next)=>{
 
 
 router.get("/books/:bookID", (req, res, next)=>{
-    Book.findById(req.params.bookID).populate("author")
+    Book.findById(req.params.bookID)
     .then((theBook)=>{
-        console.log("=-=--=-=-=-=-=-=-");
-        console.log(theBook);
         res.render("booksviews/book-details", {theBook: theBook})
     })
     .catch((err)=>{
@@ -64,15 +51,7 @@ router.get("/books/:bookID", (req, res, next)=>{
 router.get("/books/edit/:id", (req, res, next)=>{
     Book.findById(req.params.id)
     .then((theBook)=>{
-        Author.find()
-        .then((allAuthors)=>{
-            allAuthors.forEach((author)=>{
-                if(author._id.equals(theBook.author)){
-                    author.preselected = true;
-                }
-            })
-            res.render("booksviews/edit", {book: theBook, authors: allAuthors})
-        })
+        res.render("booksviews/edit", {book: theBook})
     })
     .catch((err)=>{
         next(err)

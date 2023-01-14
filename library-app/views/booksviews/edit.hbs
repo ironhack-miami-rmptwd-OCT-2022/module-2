@@ -1,0 +1,43 @@
+<h1>Welcome to Edit Page</h1>
+<h2>Currently Editing: {{book.title}}</h2>
+
+
+<form action="/books/update/{{book._id}}" method="post">
+    <div>
+        Title: 
+        <input type="text" name="title" value="{{book.title}}">
+    </div>
+    <div>
+        Description: 
+        <input type="text" name="description" value="{{book.description}}">
+    </div>
+
+  <div>
+    Author: 
+    <select name="author">
+        {{#each authors}}
+            {{#if this.preselected }}
+                <option value="{{this._id}}" selected="selected">{{this.name}} </option>
+            {{else}}
+                <option value="{{this._id}}">{{this.name}} </option>
+            {{/if}}
+        {{/each}}
+        
+        
+    </select>
+</div>
+
+    <div>
+        Rating: 
+        <input type="number" name="rating" value="{{book.rating}}">
+    </div>
+    <div>
+        Image: 
+        <input type="text" name="image" value="{{book.image_url}}">
+    </div>
+
+
+
+    <button>Save Changes</button>
+</form>
+

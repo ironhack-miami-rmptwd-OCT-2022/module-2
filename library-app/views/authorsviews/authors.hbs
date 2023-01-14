@@ -1,0 +1,14 @@
+
+<h3>Welcome to the Authors page</h3>
+
+{{#each listOfAuthors}}
+<div>
+    <a href="/authors/{{this._id}}">
+        {{this.name}}
+    </a>
+
+</div>
+<hr>
+
+
+{{/each}}
