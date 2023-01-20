@@ -1,0 +1,13 @@
+<h2>Pet Store Locations</h2>
+<br>
+<button><a href="/locations/create">Create A Pet Store</a></button>
+<br>
+<hr>
+<br>
+<div class="list--container">
+    {{#each petStores}}
+        <div class="list--container-box">
+            <a href="/locations/details/{{this._id}}">{{this.name}}</a>
+        </div>
+    {{/each}}
+</div>
