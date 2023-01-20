@@ -26,6 +26,7 @@ const projectName = "review-1";
 
 // * this is used when you want to declare a varialbe that can be seen and utilized on all your view files (ie: user info after they have logged in).
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
+app.locals.currentUser = { name: "Blah", email: "blah@gmail.com" };
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");

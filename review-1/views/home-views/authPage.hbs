@@ -1,0 +1,17 @@
+<h2>
+    {{#if login}}
+        login
+    {{else}}
+        signup
+    {{/if}}
+</h2>
+
+<form action="/login" method="post">
+    <label for="emailInput">
+        email: <input id="emailInput" type="email" name="email">
+    </label>
+
+    <label for="passwordInput">
+        password: <input id="passwordInput" type="password" name="password">
+    </label>
+</form>

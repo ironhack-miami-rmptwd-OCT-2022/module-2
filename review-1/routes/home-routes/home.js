@@ -18,15 +18,22 @@ router.get("/home", async (req, res, next) => {
 			response: [response1.data, response2.data, response3.data],
 		});
 
-		res.render("index", {
+		res.render("home-views/home", {
 			pokeData: [response1.data, response2.data, response3.data],
-			onePoke: response1,
 		});
 	} catch (error) {
 		console.log({ error });
 
 		next(error);
 	}
+});
+
+router.get("/login", (req, res, next) => {
+	res.render("home-views/authPage", { login: true });
+});
+
+router.get("/signup", (req, res, next) => {
+	res.render("home-views/authPage", { login: false });
 });
 
 module.exports = router;
