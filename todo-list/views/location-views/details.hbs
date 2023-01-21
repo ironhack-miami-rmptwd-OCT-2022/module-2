@@ -1,1 +1,61 @@
 <h2>{{petStore.name}} Details</h2>
+
+<div class="details__mainContent-container">
+    <img class="details__image-map" src="https://npr.brightspotcdn.com/dims4/default/6817d6f/2147483647/strip/true/crop/527x600+0+0/resize/880x1002!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fwlrn%2Ffiles%2F201506%2Fautocomplete_map_edited_copy.jpg" alt="Map Geo Location">
+
+    <h3>Address: 
+        {{petStore.location.streetAddress}}
+        {{petStore.location.city}}, {{petStore.location.state}}. {{petStore.location.zip}}
+    </h3>
+
+    <div>
+        <h2>Dogs Available</h2>
+        {{#each petStore.dogsForSale}}
+            <div>
+                <a href="/dog/details/{{this._id}}">{{this.name}}</a> <button class="button__delete button__delete-dog"><a href="/dog/delete/{{this._id}}/{{../petStore._id}}">X</a></button>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<div class="action__buttons">
+    <!-- Button trigger modal -->
+    <button type="button" class="button__delete button__delete-update" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Dog To Store
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Your Dog</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="center__content-column left-align" action="/dog/create" method="post">
+                        <label for="storeId"><input class="hide" type="text" name="storeId" id="storeId" value="{{petStore._id}}"></label>
+                        <label for="dogName">Name: <input type="text" name="name" id="dogName"></label>
+                        <label for="dogBreed">Breed: <input type="text" name="breed" id="dogBreed"></label>
+                        <label for="dogColor">Color: <input type="text" name="color" id="dogColor"></label>
+
+                        <label for="dogAge">Age in Years: <input type="number" name="age" id="dogAge"></label>
+                        <label for="dogSex">
+                            Dog Sex: <select name="sex" id="dogSex">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                        </label>
+                        <button>Add Dog</button>
+                    </form>
+                    {{!-- <p>Form Body Goes Here to Create a Dog</p> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="/locations/delete" method="post">
+        <input class="hide" name="storeId" type="text" value="{{petStore._id}}">
+        <button class="button__delete">Delete</button>
+    </form>
+</div>

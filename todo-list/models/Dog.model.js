@@ -6,8 +6,10 @@ const dogSchema = new Schema(
 		breed: String,
 		color: String,
 		age: Number,
-		male: Boolean,
-		female: Boolean,
+		sex: {
+			type: String,
+			enum: ["male", "female"],
+		},
 		owner: {
 			firstName: String,
 			lastName: String,

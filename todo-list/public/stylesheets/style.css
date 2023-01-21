@@ -10,3 +10,57 @@ a {
 h1 {
   color: 15px;
 }
+
+.details__mainContent-container {
+  margin-bottom: 3vw;
+}
+
+.action__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 20vw;
+}
+
+.details__image-map {
+  width: 20vw;
+  margin-bottom: 1.5vw;
+}
+
+.button__delete {
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  padding: 5px 15px;
+  font-size: 20px;
+}
+
+.button__delete-update {
+  background-color: blue;
+}
+
+.button__delete-dog {
+  padding: 0px 7px;
+  font-size: unset;
+}
+
+.center__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center__content-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left-align {
+  align-items: start;
+}
+
+.hide {
+  display: none;
+}
