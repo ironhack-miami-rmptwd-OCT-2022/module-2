@@ -42,8 +42,11 @@
                         <label for="dogAge">Age in Years: <input type="number" name="age" id="dogAge"></label>
                         <label for="dogSex">
                             Dog Sex: <select name="sex" id="dogSex">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        {{#each petGender}}
+                                            <option value="{{this.value}}">{{this.name}}</option>
+                                        {{/each}}
+                                        {{!-- <option value="male">Male</option>
+                                        <option value="female">Female</option> --}}
                                     </select>
                         </label>
                         <button>Add Dog</button>

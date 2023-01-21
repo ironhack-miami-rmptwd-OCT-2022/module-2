@@ -51,7 +51,13 @@ router.get("/details/:storeId", (req, res, next) => {
 	PetStore.findById(req.params.storeId)
 		.populate("dogsForSale")
 		.then((petStore) => {
-			res.render("location-views/details", { petStore });
+			res.render("location-views/details", {
+				petStore,
+				petGender: [
+					{ value: "male", name: "Male Dog" },
+					{ value: "female", name: "Female Dog" },
+				],
+			});
 		})
 		.catch((err) => next(err));
 });
