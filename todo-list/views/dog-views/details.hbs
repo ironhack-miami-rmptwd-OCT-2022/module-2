@@ -1,9 +1,60 @@
-<h2>{{dog.name}} Details</h2>
-<br>
-<br>
+{{#if isEditPage}}
+    <h2>{{dog.name}} Edit</h2>
+    <br>
+    <form class="center__content-column left-align" action="/dog/update/{{dog._id}}" method="post">
+        <label for="dogName">Name: <input type="text" name="name" id="dogName" value="{{dog.name}}"></label>
+        <label for="dogBreed">Breed: <input type="text" name="breed" id="dogBreed" value="{{dog.breed}}"></label>
+        <label for="dogColor">Color: <input type="text" name="color" id="dogColor" value="{{dog.color}}"></label>
 
-<div>
-    <h3>Age: {{dog.age}}</h3>
-    <h3>Breed: {{dog.breed}}</h3>
-    <h3>Color: {{dog.color}}</h3>
-</div>
+        <label for="dogAge">Age in Years: <input type="number" name="age" id="dogAge" value="{{dog.age}}"></label>
+        <label for="dogSex">
+            Dog Sex: <select name="sex" id="dogSex">
+                        {{#each petGender}}
+                            {{#if this.selected}}
+                            <option value="{{this.value}}" selected="unselect">{{this.name}}</option>
+                            {{else}}
+                            <option value="{{this.value}}">{{this.name}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+        </label>
+        <label for="dogPrice">Price: $<input type="number" name="price" id="dogPrice" value="{{dog.price}}" min="0.00" max="10000.00" step="0.01"></label>
+        <label for="dogAvailability">Available: <input type="checkbox" name="available" id="dogAvailability" {{#if dog.available}}checked{{/if}}></label>
+        <label for="dogOnHold">On Hold: <input type="checkbox" name="onHold" id="dogOnHold" {{#if dog.onHold}}checked{{/if}}></label>
+        <br>
+        <label for="dogOwnerFirstName">Owner First Name: <input type="text" name="ownerFirstName" id="dogOwnerFirstName" value="{{dog.owner.firstName}}"></label>
+        <label for="dogOwnerLastName">Owner Last Name: <input type="text" name="ownerLastName" id="dogOwnerLastName" value="{{dog.owner.lastName}}"></label>
+
+        <label for="dogSiblings">
+            Dog Siblilngs: <select name="siblings" id="dogSiblings" multiple="multiple">
+                        {{#each possibleSiblings}}
+                            {{#if this.selected}}
+                            <option value="{{this._id}}" selected="select">{{this.name}}</option>
+                            {{else}}
+                            <option value="{{this._id}}">{{this.name}}</option>
+                            {{/if}}
+                        {{/each}}
+                    </select>
+        </label>
+
+        <br>
+        <button>Update {{dog.name}}</button>
+    </form>
+{{else}}
+    <h2>{{dog.name}} Details</h2>
+    <br>
+    <br>
+
+    <div>
+        <h3>Age: {{dog.age}}</h3>
+        <h3>Breed: {{dog.breed}}</h3>
+        <h3>Color: {{dog.color}}</h3>
+        <h3>Gender: {{dog.sex}}</h3>
+        <h3>Price: ${{dog.price}}</h3>
+        <h3>Available: {{#if dog.available}} Yes {{else}} No {{/if}}</h3>
+        <h3>On Hold: {{#if dog.onHold}} Yes {{else}} No {{/if}}</h3>
+        <h3>Owner: {{#if hasOwner}} {{dog.owner.firstName}} {{dog.owner.lastName}} {{else}} none {{/if}}</h3>
+    </div>
+
+    <a href="/dog/details/{{dog._id}}?isEditPage=true"><button>Edit {{dog.name}}</button></a>
+{{/if}}

@@ -8,13 +8,34 @@
         {{petStore.location.city}}, {{petStore.location.state}}. {{petStore.location.zip}}
     </h3>
 
-    <div>
-        <h2>Dogs Available</h2>
-        {{#each petStore.dogsForSale}}
-            <div>
-                <a href="/dog/details/{{this._id}}">{{this.name}}</a> <button class="button__delete button__delete-dog"><a href="/dog/delete/{{this._id}}/{{../petStore._id}}">X</a></button>
-            </div>
-        {{/each}}
+    <div class="all-dogs__container">
+        <div>
+            <h2>Dogs Available</h2>
+            {{#each availableDogs}}
+                <div>
+                    <a href="/dog/details/{{this._id}}">{{this.name}}</a> <button class="button__delete button__delete-dog"><a href="/dog/delete/{{this._id}}/{{../petStore._id}}">X</a></button>
+                </div>
+            {{/each}}
+        </div>
+
+        <div>
+            <h2>Dogs On Hold</h2>
+            {{#each onHoldDogs}}
+                <div>
+                    <a href="/dog/details/{{this._id}}">{{this.name}}</a> <button class="button__delete button__delete-dog"><a href="/dog/delete/{{this._id}}/{{../petStore._id}}">X</a></button>
+                </div>
+            {{/each}}
+        </div>
+
+        <div>
+            <h2>Dogs With No Status</h2>
+            {{#each otherDogs}}
+                <div>
+                    <a href="/dog/details/{{this._id}}">{{this.name}}</a> <button class="button__delete button__delete-dog"><a href="/dog/delete/{{this._id}}/{{../petStore._id}}">X</a></button>
+                </div>
+            {{/each}}
+        </div>
+
     </div>
 </div>
 

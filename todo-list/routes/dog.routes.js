@@ -7,7 +7,7 @@ const Dog = require("../models/Dog.model");
 router.post("/create", (req, res, next) => {
 	console.log({ dogCreateBody: req.body });
 
-	Dog.create(req.body)
+	Dog.create({ ...req.body, available: true })
 		.then((newlyCreatedDog) => {
 			console.log({ newlyCreatedDog });
 
@@ -36,8 +36,78 @@ router.post("/create", (req, res, next) => {
 // Read route
 router.get("/details/:dogId", (req, res, next) => {
 	Dog.findById(req.params.dogId)
+		.populate("siblings")
 		.then((dog) => {
-			res.render("dog-views/details", { dog });
+			Dog.find({ _id: { $ne: dog._id } })
+				.then((allOtherDogs) => {
+					console.log({ dogDetails: dog, allOtherDogs });
+
+					const data = {
+						dog,
+						petGender: [
+							{ value: "male", name: "Male Dog" },
+							{ value: "female", name: "Female Dog" },
+						].map((gender) => ({
+							...gender,
+							selected: gender.value === dog.sex,
+						})),
+						isEditPage: req.query.isEditPage,
+						hasOwner: !!dog.owner.firstName,
+						possibleSiblings: allOtherDogs.map((sibling) => {
+							console.log({ sibling, dog });
+
+							return {
+								...sibling._doc,
+								selected: dog.siblings.some(
+									(mainDogSibling) => {
+										console.log({
+											mainDogSibling,
+											sibling,
+											dog,
+										});
+
+										return (
+											String(mainDogSibling._id) ===
+											String(sibling._id)
+										);
+									}
+								),
+							};
+						}),
+					};
+
+					console.log({
+						dogEditData: data,
+						possibleSiblings: data.possibleSiblings,
+					});
+
+					res.render("dog-views/details", data);
+				})
+				.catch((err) => next(err));
+		})
+		.catch((err) => next(err));
+});
+
+// Update route
+router.post("/update/:dogId", (req, res, next) => {
+	console.log({ dogUpdateBody: req.body });
+
+	const dogUpdateData = {
+		...req.body,
+		available: !!req.body.available,
+		onHold: req.body.onHold ? true : false,
+		owner: {
+			firstName: req.body.ownerFirstName,
+			lastName: req.body.ownerLastName,
+		},
+	};
+
+	Dog.findByIdAndUpdate(req.params.dogId, dogUpdateData, { new: true })
+		.then((updatedDog) => {
+			console.log({ updatedDog });
+
+			res.redirect(`/dog/details/${req.params.dogId}`);
+			// res.render("dog-views/details", {updatedDog});
 		})
 		.catch((err) => next(err));
 });
