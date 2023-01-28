@@ -3,12 +3,10 @@ const { Schema, model } = require("mongoose");
 const petStoreSchema = new Schema(
 	{
 		owner: {
-			type: [
-				{
-					type: Schema.Types.ObjectId,
-					ref: "User",
-				},
-			],
+			type: {
+				type: Schema.Types.ObjectId,
+				ref: "User",
+			},
 		},
 		dogsForSale: {
 			type: [{ type: Schema.Types.ObjectId, ref: "Dog" }],

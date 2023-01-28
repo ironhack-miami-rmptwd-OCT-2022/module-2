@@ -15,9 +15,15 @@
          <a href="/">Home</a>
          <a href="/locations">Locations</a>
 
+         {{#if currentUser}}
+         <h3>Hello {{currentUser.username}}</h3>
+         <form action="/auth/logout" method="post"><button>Logout</button></form>
+         {{else}}
          <a href="/auth/signup">Sign Up</a>
          <a href="/auth/login">Log In</a>
+         {{/if}}
       </nav>
+      <br>
 
       {{{body}}}
 

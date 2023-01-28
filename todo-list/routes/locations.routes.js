@@ -15,14 +15,23 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/create", (req, res, next) => {
+	if (!req.session.currentUser) {
+		res.redirect("/auth/login");
+		return;
+	}
+
 	res.render("location-views/create");
 });
 
 // CREATE from 'CRUD'
 router.post("/create", (req, res, next) => {
-	// console.log({ body: req.body });
+	if (!req.session.currentUser) {
+		res.redirect("/auth/login");
+		return;
+	}
 
 	const storeData = {
+		owner: req.session.currentUser._id,
 		name: req.body.name,
 		location: {
 			streetAddress: req.body.streetAddress,

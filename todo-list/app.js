@@ -14,15 +14,38 @@ const express = require("express");
 const hbs = require("hbs");
 
 const app = express();
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
+
+app.use(
+	session({
+		secret: "123secret",
+		resave: true,
+		saveUninitialized: true,
+		cookie: {
+			maxAge: 600000,
+		},
+		store: MongoStore.create({
+			mongoUrl: "mongodb://localhost/todo-list",
+		}),
+	})
+);
 
 // default value for title local
 const capitalize = require("./utils/capitalize");
 const projectName = "Pet Store";
 
-app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
+app.use((req, res, next) => {
+	res.locals.appTitle = `${capitalize(
+		projectName
+	)} created with IronLauncher`;
+	res.locals.currentUser = req.session.currentUser;
+	res.locals.isUserAdmin = req.session.currentUser.role === "admin";
+	next();
+});
 
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
