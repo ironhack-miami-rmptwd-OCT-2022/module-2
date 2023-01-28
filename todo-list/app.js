@@ -30,6 +30,7 @@ app.use("/", indexRoutes);
 // adding /location means every route in the location.routes file will automatically have /locaton prefixed to the endpoint.
 app.use("/locations", require("./routes/locations.routes"));
 app.use("/dog", require("./routes/dog.routes"));
+app.use("/auth", require("./routes/auth.routes"));
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
