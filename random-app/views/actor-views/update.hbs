@@ -1,0 +1,21 @@
+<h2>Update Page</h2>
+
+<form action="/actor/update/{{actor._id}}" method="post">
+    <label for="actorFirstName">First Name: <input id="actorFirstName" type="text" value="{{actor.firstName}}" name="firstName"></label>
+    <label for="actorlastName">Last Name: <input id="actorlastName" type="text" value="{{actor.lastName}}" name="lastName"></label>
+    <label for="actorAge">Age: <input id="actorAge" type="number" value="{{actor.age}}" name="age"></label>
+
+    <br>
+
+    {{#if movies}}
+    <label for="movieInput">
+        Movies: <select name="movies" id="movieInput">
+                    {{#each movies}}
+                        <option value="{{this._id}}">{{this.title}}</option>
+                    {{/each}}
+                </select>
+    </label>
+    {{/if}}
+
+    <button>Update</button>
+</form>

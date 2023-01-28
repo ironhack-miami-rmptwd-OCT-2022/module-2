@@ -1,0 +1,11 @@
+<h2>List Page</h2>
+<br>
+<hr>
+<br>
+<a href="/actor/create">Create An Actor</a>
+<br>
+<div>
+    {{#each actors}}
+        <a href="/actor/details/{{this._id}}">{{this.firstName}} {{this.lastName}}</a>  <a href="/actor/delete/{{this._id}}">Delete Actor</a>
+    {{/each}}
+</div>
