@@ -1,42 +1,69 @@
-<h1>Add a Book to the Library</h1>
+<div class="container p-5">
+    <h3 class="text-primary text-center">Add a Book to the Library</h3>
 
-<form action="/books/create-new" method="post">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form class="p-3" action="/books/create-new" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input name="title" type="text" class="form-control" id="title" aria-describedby="emailHelp">
+            </div>
 
-<div>
-    Title: 
-    <input type="text" name="title">
+
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+                <select id="author" name="author" class="form-select" aria-label="Author">
+                <option selected></option>
+                    {{#each authors}}
+                        <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+        </div>
+
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea rows="4" name="description" type="text" class="form-control" id="description"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="rating" class="form-label">Rating</label>
+                <input name="rating" type="text" class="form-control" id="rating">
+                <div id="emailHelp" class="form-text">number 1-10 decimals allowed</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="image-url" class="form-label">Image URL</label>
+                <input name="imageIdentifier" type="file" class="form-control" id="image-url">
+                <div id="emailHelp" class="form-text">copy and paste an image url in text format</div>
+            </div>
+
+              <div class="mb-3">
+                <label for="rating" class="form-label">Email of Book Donor</label>
+                <input name="donorEmail" type="email" class="form-control" id="rating">
+                <div id="emailHelp" class="form-text">enter your email here so we can thank you for your donation</div>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-2"></div>
+  
+    </div>
+
 </div>
 
 
 
-<div>
-    Author: 
-    <select name="author">
-        {{#each authors}}
-        <option value="{{this._id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-</div>
 
 
 
 
-<div>
-    Description: 
-    <input type="text" name="description">
-</div>
-<div>
-    Rating: 
-    <input type="text" name="rating">
-</div>
-<div>
-    Image url: 
-    <input type="text" name="image">
-</div>
 
 
 
-    <button>Submit</button>
-</form>
+
 
 

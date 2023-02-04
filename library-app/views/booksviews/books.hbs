@@ -1,15 +1,56 @@
+<div class="container-fluid">
 
-<h3>Welcome to the books page</h3>
+{{!-- if you have a single element floating in space, its okay to have it in a container --}}
+{{!-- but anything else next to it requires column inside of row for bootstrap design pattern --}}
+     <h3 class="text-primary text-center">Available Inventory</h3>
 
-{{#each listOfBooks}}
+ 
 
-<div>
-    <a href="/books/{{this._id}}">
-        {{this.title}} - {{this.author.name}}
-    </a>
+
+    <div class="row mt-5">
+
+    
+        {{#each listOfBooks}}
+
+        <div class="col-3 p-2 text-center tall-fixed-height">
+
+            
+
+
+            <div class="bg-light container p-4 medium-fixed-height">
+                <div class="fixed-height-x-smal">
+                        <div>
+                            {{this.title}} 
+                        </div>
+                        <div>
+                            By: {{this.author.name}}
+                        </div>
+                </div>
+        
+                <div class="mt-4">
+                    <img src="{{this.image_url}}" style="height: 100px">
+                </div>
+                <div class="row mt-4">
+                    <div class="col-8"></div>
+                    <div class="col-4">
+                        <a href="/books/{{this._id}}">See Details</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+        {{/each}}
+    </div>
+
+
+    <hr>
+
 
 </div>
-<hr>
 
-
-{{/each}}

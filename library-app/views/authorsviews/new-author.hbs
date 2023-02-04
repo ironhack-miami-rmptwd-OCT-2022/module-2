@@ -1,26 +1,51 @@
-<h1>Add an Author to the Database</h1>
+<div class="container p-5">
+    <h3 class="text-primary text-center">Add an Author to the Database</h3>
 
-<form action="/authors/create" method="post">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <form class="p-3" action="/authors/create" method="post">
+            <div class="mb-3">
+                <label for="author-name" class="form-label">Name</label>
+                <input name="name" type="text" class="form-control" id="author-name" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">The Author's First And Last Name Separate By a Space</div>
+            </div>
+            <div class="mb-3">
+                <label for="hometown" class="form-label">Hometown</label>
+                <input name="hometown" type="text" class="form-control" id="hometown">
+                <div id="emailHelp" class="form-text">for example: Springfield, IL</div>
+            </div>
 
-<div>
-    Name: 
-    <input type="text" name="name">
+            <div class="mb-3">
+                <label for="birthday" class="form-label">Date Of Birth</label>
+                <input name="birthday" type="text" class="form-control" id="birthday">
+                <div id="emailHelp" class="form-text">for example: March 2 1911</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="image-url" class="form-label">Image URL</label>
+                <input name="image" type="text" class="form-control" id="image-url">
+                <div id="emailHelp" class="form-text">copy and paste an image url in text format</div>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="col-2"></div>
+  
+    </div>
+
+
+
 </div>
-<div>
-    Hometown: 
-    <input type="text" name="hometown">
-</div>
-<div>
-    Date Of Birth: 
-    <input type="text" name="birthday">
-</div>
-
-<div>
-    Image url: 
-    <input type="text" name="image">
-</div>
 
 
 
-    <button>Submit</button>
-</form>
+
+
+
+
+
+
+

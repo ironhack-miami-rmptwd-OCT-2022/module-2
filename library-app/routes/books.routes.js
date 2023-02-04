@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Book = require("../models/Book.model");
 const Author = require("../models/Author.model");
+const uploadCloud = require("../config/cloudinary.js")
+const nodemailer = require("nodemailer");
 
 /* GET home page */
 router.get("/books", (req, res, next) => {
@@ -30,17 +32,43 @@ router.get("/books/create", (req, res, next)=>{
 
 
 
-router.post("/books/create-new", (req, res, next)=>{
+router.post("/books/create-new", uploadCloud.single("imageIdentifier"), (req, res, next)=>{
     Book.create({
         title: req.body.title, 
         author: req.body.author,
         description: req.body.description,
         rating: req.body.rating,
-        image_url: req.body.image
+        image_url: req.file.path,
     })
     .then((result)=>{
-        res.redirect("/books");
-    })
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            host: 'smtp.gmail.com',
+            auth: {
+              user: 'nick.borbe@ironhack.com',
+              pass: process.env.GMAILPASS
+            }
+          });
+          
+          var mailOptions = {
+            from: 'IronhackBookLibraryFoundation@ihapps.com',
+            to: req.body.donorEmail,
+            subject: 'Thank You For Your Donation',
+            html: `<p>Thank you for your donation!  ${req.body.title} will make an excellent addition to our library!`
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+              res.redirect('/books');
+            } else {
+              console.log('Email sent: ' + info.response);    
+              res.redirect('/books');
+            }
+          });  
+          })
+
     .catch((err)=>{
         next(err);
     })

@@ -22,6 +22,8 @@ require("./config")(app);
 const capitalize = require("./utils/capitalize");
 const projectName = "library-app";
 
+
+
 app.locals.appTitle = `${capitalize(projectName)} created with IronLauncher`;
 
 // 👇 Start handling routes here

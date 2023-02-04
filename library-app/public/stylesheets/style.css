@@ -1,12 +1,18 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00b7ff;
+
+.tall-fixed-height{
+  height: 300px;
 }
 
-h1 {
-  color: 15px;
+
+.medium-fixed-height{
+  height: 250px;
+}
+
+
+.fixed-height-x-smal{
+  height: 40px;
 }
